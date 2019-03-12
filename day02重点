@@ -1,0 +1,17 @@
+### 携带cookie请求
+- 携带一堆cookie进行请求,把cookie组成一个cookie池
+
+### 请求登录之后的网站思路 使用requests提供的请求登录之后的网站思路
+- 实例化session
+- 先使用session发送请求,登录对网站,把cookie保存在session中
+- 再使用session请求登录之后才能的之后才能访问的网站,session能够自动携带登录成功时保存在其中的cookie,进行请求
+
+###  不发送post请求,使用cookie获取登录后的界面
+- cookie过期时间很长的网站
+- 在cookie过期之前能够拿到所有的数据
+- 配合其他程序一起使用,其他程序专门获取cookie,当前程序专门请求页面
+
+### 获取登录后的页面的三种方式
+- 实例化session,使用session发送post请求,再使用他获取登录后的页面
+- hearders中添加cookie键,值为cookie字符串
+- 在请求方法中添加cookies参数,接收字典的cookie.字典形式的cookie中键是cookie的Name,值是cookie的Value
