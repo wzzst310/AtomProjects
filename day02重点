@@ -1,3 +1,24 @@
+### 判断请求是否成功
+```python
+assert (resp.status_code == 200)
+```
+### url编码 解码 专门的
+-`https://www.baidu.com/s?wd=%E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2`
+
+### 字符串格式化的另一种方式
+```python
+url = "https://www.baidu.com/{}s?wd={},{}".format("传智播客", [1, 2, 3], {"a": "1"})
+```
+### 使用代理ip
+- 准备一堆的ip地址,组成ip池,随机选择一个ip来使用
+- 如何选择代理ip
+  - {"ip":ip,"times":0}
+  - [{}{}{}}{}{}{}],对这个ip的列表进行排序,按照使用次数进行排序
+  - 选择使用次数较少的10个ip,从中随机选择一个
+- 检查ip的可用性
+  - 可以使用request添加超时参数,判断ip地址的质量
+  - 在线代理ip质量检测网站
+
 ### 携带cookie请求
 - 携带一堆cookie进行请求,把cookie组成一个cookie池
 
