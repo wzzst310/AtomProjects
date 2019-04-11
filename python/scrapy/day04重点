@@ -8,7 +8,41 @@
 - `\s`能够匹配空白字符,不仅仅包含空格,还有`\t\r\n`
 
 ### xpath学习重点
+- 使用xpath helper或者是chrome中的copy xpath都是从elements中提取的数据,
+  但是爬虫获取的是url对应的响应,往往和elements不一样
 - 获取文本
-  - `a/text()`
-- 获取属性
-  - `a/@href`
+  - `a/text()`获取a下的文本
+  - `a//text()`获取a下所有标签的文本
+
+  - `//div[@id="page"]//a[@class="n"]/@href`
+  - `//div[@id="page"]//a[1]/@href`  从1开始
+  - `//div[@id="page"]//a[last()]/@href`  从最后一个
+  - `//div[@id="page"]//a[last()-3]/@href`  倒数第三个
+  - `//div[@id="page"]//a[position()<4]/@href`  前三个
+  - `//title[@lang]` 选择拥有名为lang的属性的title元素
+  - `//a[text()='下一页>']/@href` 选择文本为下一页的a标签
+
+- `@符号`
+  - `a/@href` 获取href属性
+  - `//div[@id="BAIDU_DUP_fp_wrapper"]`
+  - `//div[@class="viewport"]
+  - `//div[@class="viewport"]//div[@class="liebiao"]//li`
+
+- `//`
+  - 在xpath开始的时候表示从当前html中任意位置开始选择
+  - `li//a` 表示的是li下的任何一个标签
+
+- * / node() 任意标签
+- @* 获取所有属性 //title[@*] 选择所有带有属性的title元素
+- | 或者 //div[@id="page"]/a[1]|//div[@id="page"]/a[2]
+
+
+###  lxml使用注意点
+- lxml能够修正html代码,但可能会改错了
+  - 使用etree.tostring观察修改之后html的样子,根据修改之后的html字符串写xpath
+
+  - lxml 能够接收bytes和str的字符串
+
+- 提取  页面数据的思路
+  - 先分组,取到一个包含分组标签的列表
+  - 遍历,取其中每一组进行数据的提取,不会造成数据的对应错乱
